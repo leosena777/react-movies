@@ -9,9 +9,9 @@ export default function Home() {
 
   useEffect(() => {
     getMovies().then((response) => {
-      console.log(response.data);
       setMovies(response.data.results);
     });
+    return () => setMovies([]);
   }, []);
 
   return (
@@ -26,6 +26,7 @@ export default function Home() {
             imageUrl={movie.poster_path}
           />
         ))}
+        {movies.length === 0 && <h1>Não há filmes</h1>}
       </Grid>
     </>
   );
